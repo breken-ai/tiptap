@@ -1,5 +1,934 @@
 # Releases
 
+## v3.31.4
+
+### @tiptap/core
+
+#### Patch Changes
+
+- 092169a: `splitBlock` no longer throws `TransformError: Inserted content deeper than insertion position` when the selection spans block boundaries (for example from the start of one paragraph into another block, or across an isolating node). The command now returns `false` when the split is not possible.
+- 092169a: Prevent extra CSS declarations from being rendered from editor content.
+- 092169a: Atom block directives (`:::name {…} :::`) indented by up to 3 spaces are now tokenized, matching CommonMark indentation rules for block constructs.
+- 092169a: Numeric HTML entities (`&#39;`, `&#x27;`) are now decoded when parsing markdown, instead of showing up as literal text in the editor.
+- 092169a: Bind `parseMarkdown` and `renderMarkdown` to the configured extension so hooks can read `this.options` and `this.name` without an Editor.
+- 092169a: Stop joinItemForward and joinItemBackward from joining across isolating nodes.
+- 092169a: Node views without a `contentDOM` no longer ignore selection mutations, so ProseMirror moves the caret back to a valid position when the browser places it inside the node view.
+- @tiptap/pm@3.31.4
+
+### @tiptap/markdown
+
+#### Patch Changes
+
+- 092169a: Fix Markdown serialization of inline code containing backticks
+- 092169a: Bind `parseMarkdown` and `renderMarkdown` to the configured extension so hooks can read `this.options` and `this.name` without an Editor.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-code
+
+#### Patch Changes
+
+- 092169a: Fix Markdown serialization of inline code containing backticks
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-table
+
+#### Patch Changes
+
+- 092169a: Table cells exported to Markdown now escape literal pipe characters, so the cell content survives when the output is read back.
+- 092169a: Multi-block table cells no longer leak a U+001F control character into Markdown.
+- 092169a: Right-clicking a cell inside a multi-cell table selection no longer collapses that selection.
+- 092169a: Prevent extra CSS declarations from being rendered from editor content.
+- 092169a: Table cells and headers no longer render the default `colspan="1"` and `rowspan="1"` attributes. Cells that actually span still render them, matching how prosemirror-tables serializes spans.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-list
+
+#### Patch Changes
+
+- 092169a: Parsing large Markdown documents that contain ordered lists is much faster. A 578KB document went from about 19s to about 160ms.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-collaboration-caret
+
+#### Patch Changes
+
+- 092169a: Prevent extra CSS declarations from being rendered from editor content.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-highlight
+
+#### Patch Changes
+
+- 092169a: Prevent extra CSS declarations from being rendered from editor content.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-text-align
+
+#### Patch Changes
+
+- 092169a: Prevent extra CSS declarations from being rendered from editor content.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-text-style
+
+#### Patch Changes
+
+- 092169a: Prevent extra CSS declarations from being rendered from editor content.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-link
+
+#### Patch Changes
+
+- 092169a: Typing spaces after a link no longer extends the link, including multiple spaces inserted in one transaction. Formatting changes and undo/redo preserve existing linked whitespace.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/react
+
+#### Patch Changes
+
+- 092169a: Fix Enter and Shift-Enter inside React node views on iOS and Android.
+- 092169a: React and Vue now use matching menu extension versions when installed from a specific release.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/vue-2
+
+#### Patch Changes
+
+- 092169a: React and Vue now use matching menu extension versions when installed from a specific release.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/vue-3
+
+#### Patch Changes
+
+- 092169a: React and Vue now use matching menu extension versions when installed from a specific release.
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-audio
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-blockquote
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-bold
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-bubble-menu
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-code-block
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-code-block-lowlight
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/extension-code-block@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-collaboration
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-details
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/extension-text-style@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-document
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-drag-handle
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/extension-collaboration@3.31.4
+  - @tiptap/extension-node-range@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-emoji
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/suggestion@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-file-handler
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/extension-text-style@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-find-and-replace
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-floating-menu
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-hard-break
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-heading
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-horizontal-rule
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-image
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-invisible-characters
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/extension-text-style@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-italic
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-mathematics
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-mention
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/suggestion@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-node-range
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-paragraph
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-ruby-text
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-strike
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-subscript
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-superscript
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-table-of-contents
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-text
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-twitch
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-typography
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-underline
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extension-unique-id
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-youtube
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+
+### @tiptap/extensions
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/html
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/starter-kit
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/extension-code@3.31.4
+  - @tiptap/extension-list@3.31.4
+  - @tiptap/extension-link@3.31.4
+  - @tiptap/extension-blockquote@3.31.4
+  - @tiptap/extension-bold@3.31.4
+  - @tiptap/extension-code-block@3.31.4
+  - @tiptap/extension-document@3.31.4
+  - @tiptap/extension-hard-break@3.31.4
+  - @tiptap/extension-heading@3.31.4
+  - @tiptap/extension-horizontal-rule@3.31.4
+  - @tiptap/extension-italic@3.31.4
+  - @tiptap/extension-paragraph@3.31.4
+  - @tiptap/extension-strike@3.31.4
+  - @tiptap/extension-text@3.31.4
+  - @tiptap/extension-underline@3.31.4
+  - @tiptap/extensions@3.31.4
+  - @tiptap/extension-list-item@3.31.4
+  - @tiptap/extension-list-keymap@3.31.4
+  - @tiptap/extension-bullet-list@3.31.4
+  - @tiptap/extension-ordered-list@3.31.4
+  - @tiptap/extension-dropcursor@3.31.4
+  - @tiptap/extension-gapcursor@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/static-renderer
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/suggestion
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/core@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-table-cell
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/extension-table@3.31.4
+
+### @tiptap/extension-table-header
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/extension-table@3.31.4
+
+### @tiptap/extension-table-row
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/extension-table@3.31.4
+
+### @tiptap/extension-list-item
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/extension-list@3.31.4
+
+### @tiptap/extension-list-keymap
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/extension-list@3.31.4
+
+### @tiptap/extension-task-item
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/extension-list@3.31.4
+
+### @tiptap/extension-task-list
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/extension-list@3.31.4
+
+### @tiptap/extension-bullet-list
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/extension-list@3.31.4
+
+### @tiptap/extension-ordered-list
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/extension-list@3.31.4
+
+### @tiptap/extension-color
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/extension-text-style@3.31.4
+
+### @tiptap/extension-font-family
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/extension-text-style@3.31.4
+
+### @tiptap/extension-drag-handle-react
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+- Updated dependencies [092169a]
+  - @tiptap/react@3.31.4
+  - @tiptap/extension-drag-handle@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-drag-handle-vue-2
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/vue-2@3.31.4
+  - @tiptap/extension-drag-handle@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-drag-handle-vue-3
+
+#### Patch Changes
+
+- Updated dependencies [092169a]
+  - @tiptap/vue-3@3.31.4
+  - @tiptap/extension-drag-handle@3.31.4
+  - @tiptap/pm@3.31.4
+
+### @tiptap/extension-character-count
+
+#### Patch Changes
+
+- @tiptap/extensions@3.31.4
+
+### @tiptap/extension-dropcursor
+
+#### Patch Changes
+
+- @tiptap/extensions@3.31.4
+
+### @tiptap/extension-focus
+
+#### Patch Changes
+
+- @tiptap/extensions@3.31.4
+
+### @tiptap/extension-gapcursor
+
+#### Patch Changes
+
+- @tiptap/extensions@3.31.4
+
+### @tiptap/extension-history
+
+#### Patch Changes
+
+- @tiptap/extensions@3.31.4
+
+### @tiptap/extension-placeholder
+
+#### Patch Changes
+
+- @tiptap/extensions@3.31.4
+
 ## v3.31.3
 
 ### @tiptap/extension-collaboration-caret

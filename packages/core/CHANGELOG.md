@@ -1,5 +1,18 @@
 # Change Log
 
+## 3.31.4
+
+### Patch Changes
+
+- 8cb08c5: `splitBlock` no longer throws `TransformError: Inserted content deeper than insertion position` when the selection spans block boundaries (for example from the start of one paragraph into another block, or across an isolating node). The command now returns `false` when the split is not possible.
+- 4d56526: Prevent extra CSS declarations from being rendered from editor content.
+- 7c089f2: Atom block directives (`:::name {…} :::`) indented by up to 3 spaces are now tokenized, matching CommonMark indentation rules for block constructs.
+- 6f14bee: Numeric HTML entities (`&#39;`, `&#x27;`) are now decoded when parsing markdown, instead of showing up as literal text in the editor.
+- 182cba2: Bind `parseMarkdown` and `renderMarkdown` to the configured extension so hooks can read `this.options` and `this.name` without an Editor.
+- 7f9a867: Stop joinItemForward and joinItemBackward from joining across isolating nodes.
+- c92b926: Node views without a `contentDOM` no longer ignore selection mutations, so ProseMirror moves the caret back to a valid position when the browser places it inside the node view.
+  - @tiptap/pm@3.31.4
+
 ## 3.31.3
 
 ### Patch Changes
