@@ -11,6 +11,10 @@ import { applyStaticEditorOptionsToExtensions, renderToElement } from '../extens
 const HTML_ATTRIBUTE_TO_REACT_ATTRIBUTE: Record<string, string> = {
   colspan: 'colSpan',
   rowspan: 'rowSpan',
+  // React drops these when they are spelled in lowercase
+  allowfullscreen: 'allowFullScreen',
+  autoplay: 'autoPlay',
+  disableremoteplayback: 'disableRemotePlayback',
 }
 
 /**

@@ -1,9 +1,12 @@
 import { prettyDOM, render } from '@testing-library/react'
+import Audio from '@tiptap/extension-audio'
 import Bold from '@tiptap/extension-bold'
 import Document from '@tiptap/extension-document'
 import Heading from '@tiptap/extension-heading'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
+import Twitch from '@tiptap/extension-twitch'
+import Youtube from '@tiptap/extension-youtube'
 import { Mark, Node as PMNode } from '@tiptap/pm/model'
 import { mapAttrsToHTMLAttributes, renderToReactElement } from './react.js'
 import React from 'react'
@@ -207,5 +210,49 @@ describe('static render json to react elements (with prosemirror)', () => {
 
     const heading = view.container.querySelector('h1')
     expect(heading?.getAttribute('dir')).toBe('rtl')
+  })
+})
+
+describe('HTML attributes with a React prop name', () => {
+  it('keeps allowfullscreen on YouTube and Twitch iframes', () => {
+    const view = render(
+      renderToReactElement({
+        content: {
+          type: 'doc',
+          content: [
+            { type: 'youtube', attrs: { src: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' } },
+            { type: 'twitch', attrs: { src: 'https://www.twitch.tv/videos/12345' } },
+          ],
+        },
+        extensions: [Document, Paragraph, Text, Youtube, Twitch],
+      }) as React.ReactElement,
+    )
+
+    const iframes = view.container.querySelectorAll('iframe')
+    expect(iframes).toHaveLength(2)
+    iframes.forEach(iframe => {
+      expect(iframe.hasAttribute('allowfullscreen')).toBe(true)
+    })
+  })
+
+  it('keeps autoplay and disableremoteplayback on audio', () => {
+    const view = render(
+      renderToReactElement({
+        content: {
+          type: 'doc',
+          content: [{ type: 'audio', attrs: { src: 'https://tiptap.dev/a.mp3' } }],
+        },
+        extensions: [
+          Document,
+          Paragraph,
+          Text,
+          Audio.configure({ autoplay: true, disableRemotePlayback: true }),
+        ],
+      }) as React.ReactElement,
+    )
+
+    const audio = view.container.querySelector('audio')
+    expect(audio?.hasAttribute('autoplay')).toBe(true)
+    expect(audio?.hasAttribute('disableremoteplayback')).toBe(true)
   })
 })
