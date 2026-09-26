@@ -8,6 +8,7 @@ import Link from '@tiptap/extension-link'
 import Paragraph from '@tiptap/extension-paragraph'
 import { generateTocIds, TableOfContents } from '@tiptap/extension-table-of-contents'
 import Text from '@tiptap/extension-text'
+import Twitch from '@tiptap/extension-twitch'
 import { generateUniqueIds, UniqueID } from '@tiptap/extension-unique-id'
 import Youtube from '@tiptap/extension-youtube'
 import type { DOMOutputSpec } from '@tiptap/pm/model'
@@ -392,5 +393,31 @@ describe('static render json to string (with prosemirror)', () => {
 
     expect(html).toMatch(/\bid="[^"]+"/)
     expect(html).toMatch(/data-toc-id="[^"]+"/)
+  })
+})
+
+describe('DOMOutputSpec with a text child in the second slot', () => {
+  it('renders `[tag, text]` specs as an element with that text', () => {
+    expect(domOutputSpecToHTMLString(['div', 'Invalid Twitch URL'])()).toBe(
+      '<div>Invalid Twitch URL</div>',
+    )
+    expect(domOutputSpecToHTMLString(['p', 'a < b', ['span', 'c']])()).toBe(
+      '<p>a &lt; b<span>c</span></p>',
+    )
+  })
+
+  it('renders a Twitch node with an unsupported URL like the editor does', () => {
+    const html = renderToHTMLString({
+      content: {
+        type: 'doc',
+        content: [
+          { type: 'twitch', attrs: { src: 'https://example.com/not-twitch' } },
+          { type: 'paragraph', content: [{ type: 'text', text: 'after' }] },
+        ],
+      },
+      extensions: [Document, Paragraph, Text, Twitch],
+    })
+
+    expect(html).toBe('<div>Invalid Twitch URL</div><p>after</p>')
   })
 })

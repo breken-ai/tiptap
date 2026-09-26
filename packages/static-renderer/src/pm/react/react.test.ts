@@ -4,6 +4,7 @@ import Document from '@tiptap/extension-document'
 import Heading from '@tiptap/extension-heading'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
+import Twitch from '@tiptap/extension-twitch'
 import { Mark, Node as PMNode } from '@tiptap/pm/model'
 import { mapAttrsToHTMLAttributes, renderToReactElement } from './react.js'
 import React from 'react'
@@ -207,5 +208,24 @@ describe('static render json to react elements (with prosemirror)', () => {
 
     const heading = view.container.querySelector('h1')
     expect(heading?.getAttribute('dir')).toBe('rtl')
+  })
+})
+
+describe('DOMOutputSpec with a text child in the second slot', () => {
+  it('renders a Twitch node with an unsupported URL like the editor does', () => {
+    const view = render(
+      renderToReactElement({
+        content: {
+          type: 'doc',
+          content: [
+            { type: 'twitch', attrs: { src: 'https://example.com/not-twitch' } },
+            { type: 'paragraph', content: [{ type: 'text', text: 'after' }] },
+          ],
+        },
+        extensions: [Document, Paragraph, Text, Twitch],
+      }) as React.ReactElement,
+    )
+
+    expect(view.container.innerHTML).toBe('<div>Invalid Twitch URL</div><p>after</p>')
   })
 })

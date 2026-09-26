@@ -48,6 +48,12 @@ export function domOutputSpecToHTMLString(
   }
   if (typeof content === 'object' && 'length' in content) {
     const [_tag, attrs, children, ...rest] = content as DOMOutputSpecArray
+
+    // `['div', 'text']`: a string in the second slot is a text child, not attributes
+    if (typeof attrs === 'string') {
+      return domOutputSpecToHTMLString([_tag, {}, ...content.slice(1)] as DOMOutputSpecArray)
+    }
+
     let tag = _tag
     const parts = tag.split(' ')
 

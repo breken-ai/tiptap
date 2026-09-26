@@ -71,6 +71,12 @@ export function domOutputSpecToReactElement(
   if (typeof content === 'object' && 'length' in content) {
     // oxlint-disable-next-line prefer-const
     let [tag, attrs, children, ...rest] = content as DOMOutputSpecArray
+
+    // `['div', 'text']`: a string in the second slot is a text child, not attributes
+    if (typeof attrs === 'string') {
+      return domOutputSpecToReactElement([tag, {}, ...content.slice(1)] as DOMOutputSpecArray, key)
+    }
+
     const parts = tag.split(' ')
 
     if (parts.length > 1) {
