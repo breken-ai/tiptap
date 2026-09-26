@@ -66,7 +66,7 @@ export function renderToMarkdown({
           return `${Array.from<string>({ length: level }).fill('#').join('')} ${children}\n`
         },
         codeBlock({ node, children }) {
-          return `\n\`\`\`${node.attrs.language}\n${serializeChildrenToHTMLString(children)}\n\`\`\`\n`
+          return `\n\`\`\`${node.attrs.language ?? ''}\n${serializeChildrenToHTMLString(children)}\n\`\`\`\n`
         },
         blockquote({ children }) {
           return `\n${serializeChildrenToHTMLString(children)
@@ -76,7 +76,7 @@ export function renderToMarkdown({
             .join('\n')}\n`
         },
         image({ node }) {
-          return `![${node.attrs.alt}](${node.attrs.src})`
+          return `![${node.attrs.alt ?? ''}](${node.attrs.src})`
         },
         hardBreak() {
           return '\n'

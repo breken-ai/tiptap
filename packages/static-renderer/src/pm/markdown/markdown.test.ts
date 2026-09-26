@@ -1,3 +1,4 @@
+import Image from '@tiptap/extension-image'
 import { TableKit } from '@tiptap/extension-table'
 import StarterKit from '@tiptap/starter-kit'
 import { renderToMarkdown } from './markdown.js'
@@ -414,5 +415,31 @@ describe('static render json to string (no prosemirror)', () => {
     })
 
     expect(md).toBe('\nhello\n')
+  })
+})
+
+describe('renderToMarkdown missing attributes', () => {
+  it('writes an empty fence info string for a code block without a language', () => {
+    const md = renderToMarkdown({
+      content: {
+        type: 'doc',
+        content: [{ type: 'codeBlock', content: [{ type: 'text', text: 'let a = 1' }] }],
+      },
+      extensions: [StarterKit],
+    })
+
+    expect(md).toBe('\n```\nlet a = 1\n```\n')
+  })
+
+  it('writes an empty alt text for an image without alt', () => {
+    const md = renderToMarkdown({
+      content: {
+        type: 'doc',
+        content: [{ type: 'image', attrs: { src: 'https://tiptap.dev/logo.png' } }],
+      },
+      extensions: [StarterKit, Image],
+    })
+
+    expect(md).toBe('![](https://tiptap.dev/logo.png)')
   })
 })
