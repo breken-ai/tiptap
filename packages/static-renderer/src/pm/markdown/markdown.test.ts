@@ -416,3 +416,28 @@ describe('static render json to string (no prosemirror)', () => {
     expect(md).toBe('\nhello\n')
   })
 })
+
+describe('renderToMarkdown headings', () => {
+  it('renders a heading with marked text without commas between the parts', () => {
+    const md = renderToMarkdown({
+      content: {
+        type: 'doc',
+        content: [
+          {
+            type: 'heading',
+            attrs: { level: 2 },
+            content: [
+              { type: 'text', text: 'Hello ' },
+              { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
+              { type: 'text', text: ' and ' },
+              { type: 'text', text: 'it', marks: [{ type: 'italic' }] },
+            ],
+          },
+        ],
+      },
+      extensions: [StarterKit],
+    })
+
+    expect(md).toBe('## Hello **bold** and _it_\n')
+  })
+})
