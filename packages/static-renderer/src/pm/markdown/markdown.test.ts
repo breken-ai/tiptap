@@ -416,3 +416,31 @@ describe('static render json to string (no prosemirror)', () => {
     expect(md).toBe('\nhello\n')
   })
 })
+
+describe('renderToMarkdown ordered lists', () => {
+  const orderedList = (start: number) => ({
+    type: 'doc',
+    content: [
+      {
+        type: 'orderedList',
+        attrs: { start },
+        content: ['first', 'second'].map(text => ({
+          type: 'listItem',
+          content: [{ type: 'paragraph', content: [{ type: 'text', text }] }],
+        })),
+      },
+    ],
+  })
+
+  it('numbers the items from the list start', () => {
+    const md = renderToMarkdown({ content: orderedList(3), extensions: [StarterKit] })
+
+    expect(md).toBe('\n3. first\n4. second\n')
+  })
+
+  it('numbers a list that starts at 1 from 1', () => {
+    const md = renderToMarkdown({ content: orderedList(1), extensions: [StarterKit] })
+
+    expect(md).toBe('\n1. first\n2. second\n')
+  })
+})
