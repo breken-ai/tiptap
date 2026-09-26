@@ -101,8 +101,11 @@ export const Heading = Node.create<HeadingOptions>({
       return ''
     }
 
-    // Use current context for proper joining/spacing
-    return `${headingChars} ${h.renderChildren(node.content)}`
+    // A heading is a single Markdown line, so hard breaks become <br> tags
+    // (the parser turns <br> back into hard breaks, as it does in table cells)
+    const text = h.renderChildren(node.content).replace(/[ \t]*\r?\n[ \t]*/g, '<br>')
+
+    return `${headingChars} ${text}`
   },
 
   addCommands() {
