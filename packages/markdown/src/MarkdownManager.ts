@@ -36,6 +36,10 @@ import {
 import { collectMarkSpanTexts } from './utils/collectMarkSpanTexts.js'
 import { htmlContainsUnrecognizedTag } from './utils/htmlTagDetection.js'
 
+/** Bare URLs and email addresses that GFM turns into links (one capture group, for `split`) */
+const BARE_LINK_REGEX =
+  /((?:(?:https?|ftp):\/\/|www\.)[^\s<]+|[A-Za-z0-9._+-]+@[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]*[A-Za-z0-9])+)/gi
+
 export class MarkdownManager {
   private markedInstance: typeof marked
   private activeParseLexer: Lexer | null = null
@@ -1157,7 +1161,11 @@ export class MarkdownManager {
       return text
     }
 
-    return this.escapeMarkdownSyntax(encodeHtmlEntities(text))
+    const isInsideLink = (node.marks || []).some(
+      m => (typeof m === 'string' ? m : m.type) === 'link',
+    )
+
+    return this.escapeMarkdownSyntax(encodeHtmlEntities(text), !isInsideLink)
   }
 
   /**
@@ -1169,8 +1177,19 @@ export class MarkdownManager {
    * Characters inside code blocks/code marks are skipped by the caller
    * (`encodeTextForMarkdown`) via the existing `isInsideCode` guard.
    */
-  private escapeMarkdownSyntax(text: string): string {
-    return text.replace(/([\\`*_[\]~])/g, '\\$1')
+  private escapeMarkdownSyntax(text: string, keepBareLinks = false): string {
+    const escape = (part: string) => part.replace(/([\\`*_[\]~])/g, '\\$1')
+
+    if (!keepBareLinks) {
+      return escape(text)
+    }
+
+    // GFM turns bare URLs and email addresses into links, and a backslash inside one
+    // becomes part of the link, so leave them as they are (odd indexes are the matches)
+    return text
+      .split(BARE_LINK_REGEX)
+      .map((part, index) => (index % 2 === 1 ? part : escape(part)))
+      .join('')
   }
 
   renderNodeToMarkdown(
